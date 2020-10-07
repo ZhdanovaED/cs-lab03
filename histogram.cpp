@@ -1,5 +1,6 @@
 #include "histogram.h"
 #include <vector>
+#include <windows.h>
 void find_minmax(const vector<double>& numbers, double& min, double& max)
 {
     if(numbers.size()==0)
@@ -20,16 +21,28 @@ void find_minmax(const vector<double>& numbers, double& min, double& max)
             max=numbers[i];
         }}}
 }
-vector<size_t> make_histogram(const vector<double>& numbers, size_t bin_count){
-    double min, max;
-    find_minmax(numbers, min, max);
-    vector<size_t>count(bin_count,0);
-    for (double x: numbers){
-        size_t bin_index=(size_t)(x-min)*(bin_count)/(max-min);
-        if (bin_index==bin_count)
-        {
-            bin_index--;
-        }
-        count[bin_index]++;}
-    return count;
+ string make_info_text() {
+    stringstream buffer;
+    DWORD WINAPI GetVersion();
+    DWORD mask = 0x0000ffff;
+    DWORD mask2 = 0x000000ff;
+    DWORD info = GetVersion();
+    DWORD platform = info >> 16;
+    DWORD version = info & mask;
+    DWORD version_major = version & mask2;
+    DWORD version_minor = version >>8;
+    if ((version & 0x40000000) == 0) {
+
+
+         DWORD build = platform;
+
+            buffer << "Windows v" << version_major << "." << version_minor << "(build " << build << ")\n";
+    }
+
+    char computer_name[MAX_COMPUTERNAME_LENGTH + 1];
+    DWORD size = sizeof(computer_name);
+    GetComputerNameA(computer_name, &size);
+    buffer << "Computer name: " << computer_name << "\n";
+
+    return buffer.str();
 }
