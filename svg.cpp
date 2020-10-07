@@ -2,6 +2,7 @@
 #include <vector>
 #include "svg.h"
 #include "histogram.h"
+
 void svg_begin(double width, double height) {
     cout << "<?xml version='1.0' encoding='UTF-8'?>\n";
     cout << "<svg ";

@@ -42,6 +42,7 @@ vector<size_t> make_histogram(const Input& data){
         }
     return bins;
 }
+
  string make_info_text() {
     stringstream buffer;
     DWORD WINAPI GetVersion();
